@@ -1,0 +1,41 @@
+{
+    "type": "record",
+    "name": "BoxCollaborationEvent",
+    "namespace": "com.paychex.pcdcmsgproc.boxCollaborationEvent.schema",
+    "fields": [
+    {
+        "name": "eventId",
+        "type": "int",
+        "default": -1
+    },
+    {
+        "name": "eventType",
+        "type": "string",
+        "default": null
+    },
+    {
+        "name": "eventTimestamp",
+        "type": "long",
+        "default": 100
+    },
+    {
+        "name": "collaboratorId",
+        "type": "int",
+        "default": -1
+    },
+    {
+        "name": "collaboratorName",
+        "type": "string",
+        "default": null
+    },
+    {
+        "name": "fileId",
+        "type": "string",
+        "default": null
+    },
+    {
+        "name": "fileName",
+        "type": "string",
+        "default": null
+    }]
+}
