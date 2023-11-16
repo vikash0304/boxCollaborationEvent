@@ -1,0 +1,56 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://packages.confluent.io/maven/' }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:3.1.5"
+    }
+}
+
+group = 'com.paychex.pcdcmsgproc'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.confluent:kafka-avro-serializer:5.4.3'
+    implementation 'io.confluent:kafka-schema-registry-client:5.4.3'
+    implementation 'org.apache.avro:avro:1.11.0'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(AbstractCompile) {
+    options.encoding = 'UTF-8'
+}
+
+avro {
+    createSetters = true
+    fieldVisibility = 'PRIVATE'
+    stringType = 'String'
+    outputDir = file("${project.buildDir}/generated-sources/avro")
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs "build/generated-sources/avro"
+        }
+    }
+}
